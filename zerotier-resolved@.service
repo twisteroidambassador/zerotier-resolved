@@ -5,7 +5,7 @@ After=sys-subsystem-net-devices-%i.device
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/python /opt/zerotier-resolved/zerotier-resolved.py -v -I %i
+ExecStart=/usr/bin/python /usr/bin/zerotier-resolved.py -v -I %i
 
 ProtectSystem=strict
 PrivateDevices=true	
