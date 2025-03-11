@@ -1,0 +1,42 @@
+[Unit]
+Description=ZeroTier resolved service for interface %i
+BindsTo=sys-subsystem-net-devices-%i.device
+After=sys-subsystem-net-devices-%i.device
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python /opt/zerotier-resolved/zerotier-resolved.py -v -I %i
+
+ProtectSystem=strict
+PrivateDevices=true	
+PrivateTmp=true
+ProtectKernelLogs=true
+ProtectProc=invisible
+# PrivateUsers=true cannot be used because authtoken.secret is owned by a non-root user
+ProtectHome=true
+UMask=0077
+RestrictNamespaces=true
+LockPersonality=true
+NoNewPrivileges=true
+ProtectKernelModules=true
+SystemCallArchitectures=native
+ProtectHostname=true
+# netlink and unix required by resolvectl
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+RestrictRealtime=true
+ProtectControlGroups=true
+ProtectKernelTunables=true
+RestrictSUIDSGID=true
+ProtectClock=true
+ProcSubset=pid
+# required to read authtoken.secret file
+CapabilityBoundingSet=cap_dac_override
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources
+MemoryDenyWriteExecute=yes
+DevicePolicy=closed
+IPAddressAllow=localhost
+IPAddressDeny=any
+
+[Install]
+WantedBy=sys-subsystem-net-devices-%i.device
