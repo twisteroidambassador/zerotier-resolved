@@ -79,6 +79,8 @@ The included `systemd` unit file invokes `zerotier-resolved.py` whenever the net
 so DNS servers are properly configured even after a reboot.
 It still does not auto update if the network's DNS configuration is changed at the controller, though.
 
+### Manual Install
+
 - Copy `zerotier-resolved.py` to somewhere convenient,
 perhaps under `/usr/local/bin` or `/opt`.
 
@@ -101,7 +103,14 @@ perhaps under `/usr/local/bin` or `/opt`.
 sudo systemctl enable --now zerotier-resolved@ztxxxxxxxx
 ```
 
-## Other installation methods
+### Arch Linux Install
+
+After cloning this repository,
+just run `makepkg` and install the resulting package.
+Then, enable the systemd service as above.
+
+
+## Other invocation methods
 
 ... are left as an exercise for the reader.
 
