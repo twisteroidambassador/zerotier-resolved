@@ -64,7 +64,8 @@ def generate_resolvectl_commands(
         )
         commands.extend([
             ['/usr/bin/resolvectl', 'domain', device, dns_domain],
-            ['/usr/bin/resolvectl', 'dns', device, *dns_servers]
+            ['/usr/bin/resolvectl', 'dns', device, *dns_servers],
+            ['/usr/bin/resolvectl', 'default-route', device, 'no'],
         ])
     return commands
 
